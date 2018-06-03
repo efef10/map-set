@@ -1,14 +1,18 @@
 class ObjectPool{
     constructor(){
         this.pool = {};
+        this.counter = 1;
     }
     
     add(obj){
-        this.pool[obj.toString()]=obj;
+        if(!obj.counter){
+            obj.counter = this.counter;
+            this.pool[this.counter++]=obj;
+        }
     }
     
     contains(obj){
-        return this.pool[obj.toString()] === obj
+        return obj.counter !== undefined
     }
 }
 
